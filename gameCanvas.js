@@ -1,18 +1,14 @@
-window.addEventListener("keyup", ev => {
-  if (ev.keyCode === 80) {
+function button_click() {
 	var c = document.getElementById("myCanvas");
 	var ctx = c.getContext("2d");
-	c.addEventListener('mousemove', mouseMoved);
-	window.requestAnimationFrame(draw);
-
 
 	var border = [
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 		[1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1],
 		[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1],
-		[1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1],
-		[1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1],
-		[1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1],
+		[1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1],
+		[1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1],
+		[1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1],
 		[1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1],
 		[1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1],
 		[1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1],
@@ -22,20 +18,38 @@ window.addEventListener("keyup", ev => {
 		[1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1],
 		[1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1],
 		[1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1],
-		[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, -1, 1],
+		[1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, -1, 1],
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 	];
 	var width = myCanvas.width;
 	var blockSize = width /border.length;
-	var playerLocation = {x: 0, y: 0};
+	var playerLocation = {x: 1, y: 1};
+	document.addEventListener("keydown",keyDown);
 
-	playerLocation.x
+	var minutesLabel = document.getElementById("minutes");
+	var secondsLabel = document.getElementById("seconds");
+	var totalSeconds = 0;
+	setInterval(setTime, 1000);
 
-	var me = new player(blockSize + 15, blockSize + 15, "blue", blockSize - 5, blockSize - 5);
+	function setTime() {
+  		++totalSeconds;
+  		secondsLabel.innerHTML = totalSeconds % 60;
+  		minutesLabel.innerHTML = parseInt(totalSeconds / 60);
 
-	function mouseMoved(event) {
-		me.setLocation(event.clientX - 20, event.clientY - 140);
-	}
+  		var sec = "" + totalSeconds % 60;
+  		if(sec.length < 2) {
+  			secondsLabel.innerHTML = "0" + sec;
+  		} else {
+  			secondsLabel.innerHTML = sec;
+  		}
+
+  		var min = "" + parseInt(totalSeconds / 60);
+  		if(min.length < 2) {
+  			minutesLabel.innerHTML = "0" + min;
+  		} else {
+  			minutesLabel.innerHTML = min;
+  		}
+	}	
 
 	function drawBorder(x, y) {
 		ctx.beginPath();
@@ -43,46 +57,57 @@ window.addEventListener("keyup", ev => {
 		ctx.fillStyle = "black";
 		ctx.fill(); 
 		ctx.closePath();
+		ctx.stroke();
 	}
 
 	function drawEndzone() {
 		ctx.beginPath();
-		ctx.rect( blockSize * (border[0].length - 2), blockSize * (border[0].length - 2), blockSize, blockSize);
+		ctx.rect(blockSize * (border[0].length - 2), blockSize * (border[0].length - 2), blockSize, blockSize);
 		ctx.fillStyle = "yellow";
 		ctx.fill();
 		ctx.closePath();
 	}
-	function player(x, y, color, width, height) {
-	   this.x = x;
-	   this.y = y;
-	   this.color = color;
-	   this.width = width;
-	   this.height = height;
+	function player() {
+	  	ctx.beginPath();
+		ctx.rect(playerLocation.x * blockSize, playerLocation.y * blockSize, blockSize, blockSize);
+		ctx.fillStyle = "blue";
+		ctx.fill(); 
+		ctx.closePath();
+	}
+	function detectWall(x, y) {
+		if(y > 0 && x > 0 && border[y][x] != 1) {
+			return true;
+		}
+		return false;
+	}
+	console.log("Wall " + detectWall(playerLocation.x, playerLocation.y));
 
-	   this.setLocation = function(x, y) {
-	      this.x = x;
-	      this.y = y;
-	   }
-
-	   this.draw = function() {
-	      ctx.fillStyle = this.color;
-	      ctx.beginPath();
-	      ctx.rect(this.x, this.y, this.width, this.height);
-	      ctx.fill();
-	      ctx.closePath();
-	   }
+	function keyDown(event) {
+		if(event.keyCode == "37" && detectWall(playerLocation.x - 1, playerLocation.y) == true && reachToEndzone(playerLocation.x, playerLocation.y) == true) {
+			playerLocation.x--;
+			draw();
+		} else if(event.keyCode == "38" && detectWall(playerLocation.x, playerLocation.y - 1) == true && reachToEndzone(playerLocation.x, playerLocation.y) == true) {
+			playerLocation.y--;
+			draw();
+		} else if(event.keyCode == "39" && detectWall(playerLocation.x + 1, playerLocation.y) == true && reachToEndzone(playerLocation.x, playerLocation.y) == true) {
+			playerLocation.x++;
+			draw();
+		} else if(event.keyCode == "40" && detectWall(playerLocation.x, playerLocation.y + 1) == true && reachToEndzone(playerLocation.x, playerLocation.y) == true) {
+			playerLocation.y++;
+			draw();		
+		} 
+	console.log(event.keyCode);
 	}
 
-	// function detectWall(me) {
-	// 	for(var y = 0; y < border.length; y++) {
-	// 		for(var x = 0; x < border[y].length: x++) {
-	// 			if(border[y][x] == 1) {
-	// 				if(me.x > )
-	// 			}
-	// 		}
-	// 	}
-	// }
-	console.log(border.length);
+	function reachToEndzone(x, y) {
+		if(border[y][x + 1] == -1) {
+			alert('Goal!!!!!');
+			return false;
+		}
+		return true;
+	}
+	console.log(reachToEndzone(playerLocation.x, playerLocation.y));
+
 	function draw() {
 		ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
 		for(var y = 0; y < border.length; y++) {
@@ -94,17 +119,10 @@ window.addEventListener("keyup", ev => {
 				}
 			}
 		}
-		// if(detectWall(x, y) == true) {
-		// 	console.log("True");
-		// }
-		// if(detectWall(x, y) == false) {
-		// 	console.log("True");
-		// }
-		me.draw();
-		window.requestAnimationFrame(draw);
-	}
+   		player();
+   	}
 	draw();
+}
 
-  }
-});
+
 

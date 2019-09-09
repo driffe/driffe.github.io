@@ -3,10 +3,12 @@
 <body>
 <div id="startScreen">
   <div>
-    <h1>Don't touch the walls</h1>
+    <h1>Escape the Maze</h1>
   </div>
   <div>
-    <p>1. Put your mouse on start button<br/>2. Press <span style= 'color: red' 'font-weight: bold'>P</span> to start</p>
+    <p>1. Go to the yellow zone.<br>
+      2. Press <span style= 'color: red' 'font-weight: bold'>Play</span> to start.<br>
+      3. Press <span>&uarr; &darr; &larr; &rarr;</span>to move.</p>
   </div>
 </div>
 <canvas id="myCanvas" width="500" height="500" style="border:1px solid #000000;">
@@ -15,13 +17,22 @@
 <script src="gameCanvas.js">
 </script>
 <div class='play'>
-    <input id="play" type="button" value="Play"/>
+    <input id="play" type="button" onclick="button_click();" value="Play"/>
+</div>
+<div class="time">
+    <p>Time</p><label id="minutes">00</label>:<label id="seconds">00</label>
 </div>
 <style>
     .play{
         position: absolute;
-        top:170px;
-        left:50px          
+        top: 155px;
+        left: 10px;         
+    }
+    .time{
+      position: absolute;
+      top: 140px;
+      left: 450px;
+      color: white;
     }
 </body>
 </html>
