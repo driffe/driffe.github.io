@@ -1,0 +1,19 @@
+/* .start_screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.play{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.time{
+    color: white;
+} */
+canvas {
+    border: 1px solid #000;
+    display: block;
+    margin: 20px auto;
+}

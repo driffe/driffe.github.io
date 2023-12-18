@@ -1,38 +1,55 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
-<body>
-<div id="startScreen">
-  <div>
-    <h1>Escape the Maze</h1>
-  </div>
-  <div>
-    <p>1. Go to the yellow zone.<br>
-      2. Press <span style= 'color: red' 'font-weight: bold'>Play</span> to start.<br>
-      3. Press <span>&uarr; &darr; &larr; &rarr;</span>to move.</p>
-  </div>
-</div>
-<canvas id="myCanvas" width="500" height="500" style="border:1px solid #000000;">
-</canvas>
+  <body>
+    <div class="start_screen">
+      <div>
+        <h1>Escape the Maze</h1>
+      </div>
+      <div>
+        <p>1. Go to the yellow zone.<br>
+          2. Press <span style= 'color: red' font-weight: bold>Play</span> to start.<br>
+          3. Press <span>&uarr; &darr; &larr; &rarr;</span>to move.</p>
+        </div>
+        <div>
+          <label for="r_label">Row:</label>
+          <input id="row" type="number"/>
+          <label for="c_label">Column:</label>
+          <input id="column" type="number"/>
+          <button onclick="button_click()">Generate Maze</button>
 
-<script src="gameCanvas.js">
-</script>
-<div class='play'>
-    <input id="play" type="button" onclick="button_click();" value="Play"/>
-</div>
-<div class="time">
-    <p>Time</p><label id="minutes">00</label>:<label id="seconds">00</label>
-</div>
-<style>
-    .play{
-        position: absolute;
-        top: 155px;
-        left: 10px;         
-    }
-    .time{
-      position: absolute;
-      top: 140px;
-      left: 450px;
-      color: white;
-    }
+        </div>
+        <div class='play'>
+          <label id="minutes">00</label>:<label id="seconds">00</label>
+        </div>
+        <canvas id="myCanvas" width="500" height="500" style="border:1px solid #000000;">
+        </canvas>
+    </div>
+
+    <script src="gameCanvas.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Maze Game</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="600" height="600"></canvas>
+    <div>
+        <label for="row">Rows:</label>
+        <input type="number" id="row" value="21">
+        <label for="column">Columns:</label>
+        <input type="number" id="column" value="21">
+        <button onclick="button_click()">Generate Maze</button>
+    </div>
+    <div>
+        <p>Time: <span id="minutes">00</span>:<span id="seconds">00</span></p>
+    </div>
+    <script src="gameCanvas.js"></script>
 </body>
 </html>
+
