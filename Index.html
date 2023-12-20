@@ -2,19 +2,16 @@
 <html>
   <body>
     <div class="start_screen">
-      <div>
-        <h1>Escape the Maze</h1>
-      </div>
-      <div>
+      <h1>Escape the Maze</h1>
+      <div class="intro">
         <p>1. Go to the yellow zone.<br>
-          2. Press <span style= 'color: red' font-weight: bold>Play</span> to start.<br>
+          2. Press <span style= 'color: #ED7D31' font-weight: bold>Generate Maze</span> to start.<br>
           3. Press <span>&uarr; &darr; &larr; &rarr;</span>to move.</p>
         </div>
         <div>
-          <button onclick="button_click()">Generate Maze</button>
-
+          <button class="btn" onclick="button_click()">Generate Maze</button>
         </div>
-        <div class='play'>
+        <div class='time'>
           <label id="minutes">00</label>:<label id="seconds">00</label>
         </div>
         <canvas id="myCanvas" width="700" height="700" style="border:1px solid #000000;">

@@ -1,19 +1,48 @@
 .start_screen {
+    background-color: #4F4A45;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+.start_screen h1 {
+    color: #F6F1EE;
+}
+.intro p{
+    color: #F6F1EE;
 }
 .play{
     display: flex;
     justify-content: space-between;
     flex-direction: row;
 }
+.btn {
+    background: #6C5F5B;
+    padding: 10px;
+    font-weight: bold;
+    border: #4F4A45;
+    border-radius: 8px;
+}
+.btn:hover {
+    cursor: pointer;
+    background: #ED7D31;
+    padding: 15px;
+}
 .time{
     color: white;
+    margin-top: 10px;
+    font-weight: bold;
 }
 canvas {
     border: 1px solid #000;
     display: block;
     margin: 20px auto;
 }
+
+
+/* 
+ED7D31 highlight
+6C5F5B sim
+4F4A45 bg color
+F6F1EE text
+*/
