@@ -1,4 +1,4 @@
-/* .start_screen {
+.start_screen {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,7 +11,7 @@
 }
 .time{
     color: white;
-} */
+}
 canvas {
     border: 1px solid #000;
     display: block;
