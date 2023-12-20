@@ -32,7 +32,7 @@ function button_click() {
     var c = document.getElementById("myCanvas");
     var ctx = c.getContext("2d");
     var width = c.width;
-	var maze = generateMaze(10,10)
+	var maze = generateMaze(30,30)
     var blockSize = width / (maze.length); // Adjust the blockSize calculation
     console.log(blockSize);
     var playerLocation = { x: 1, y: 0 };
